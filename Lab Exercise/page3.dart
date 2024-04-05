@@ -8,7 +8,7 @@ void main() {
 }
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  const Home({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,229 +16,381 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Container(
           margin: EdgeInsets.all(10),
-         child: Row(
-           children: [
-             Icon(Icons.arrow_circle_left),
-             SizedBox(width: 10),
-             Text('Order Details')
-           ],
-         ),
-        )
-      ),
-
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Row(
-              children: [
-                Container(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.blue,
-                        width: 10,
-                      ),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Icon(Icons.ramp_right_sharp),
-                  )
+          child: Row(
+            children: [
+              Icon(
+                  Icons.arrow_back,
+                color: Colors.black,
+              ),
+              SizedBox(width: 10),
+              Text(
+                  'Order Details',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
                 ),
-                SizedBox(width: 20),
-                Column(
+              )
+            ],
+          ),
+        ),
+      ),
+      body:SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+              color: Colors.grey[400]
+          ),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      child:Container(
+                        padding: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            color: Colors.blue[100],
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    child : Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30)
+                                      ),
+                                      child: Icon(
+                                      Icons.check_circle,
+                                      size: 40,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                  ),
+
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Completed',
+                                        style: TextStyle(
+                                            color: Colors.lightBlueAccent,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                      Text(
+                                        'Order Completed 24 july 2024',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w500
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_right,
+                              size: 40,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Order ID',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                '#524120',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                          Divider(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Order Date',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                '#20 july 2024, 05:00 PM',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Completed',
+                      'Purchased Items',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.lightBlue,
-                        fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18
                       ),
                     ),
+                    SizedBox(height: 20),
+                    Tshirt(type: 'blue T-Shirt'),
+                    SizedBox(height: 20),
+                    Tshirt(type: 'blue T-Shirt'),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Shipping Information',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18
+                      ),),
                     SizedBox(height: 10),
                     Container(
-                      child: Row(
-                        children : [
-                          Container(
-                            child: Text(
-                              'Order completed july',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Name',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
                               ),
-                            ),
+                              Text(
+                                'Jacob Jones',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Phone Number',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                '(105) 555_3652',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Address',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                '61480 Sunbrook Park, PC',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Shipment',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                'Economy',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
                           ),
                         ],
                       ),
                     ),
                   ],
                 ),
-                SizedBox(width: 110),
-                Icon(
-                    Icons.arrow_right,
-                  size: 50,
-                )
-              ],
-            ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Shipping Information',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18
+                      ),),
+                    SizedBox(height: 10),
+                    Container(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Name',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                'Jacob Jones',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Phone Number',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                '(105) 555_3652',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Address',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                '61480 Sunbrook Park, PC',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Shipment',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                              Text(
+                                'Economy',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
+        ),
+      )
 
-          Container(
-            margin: EdgeInsets.fromLTRB(20, 20, 20, 5),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        'Order Id',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w200
-                        ),
-                    ),
-                    Text(
-                        '#524563',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Order Date',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w200
-                      ),
-                    ),
-                    Text(
-                      '20 , july 2024, 05:23',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 30),
-                Text('purchased items',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20
-                )),
-                Tshirt(),
-                SizedBox(height: 5),
-                Tshirt(),
-              SizedBox(height: 20),
-                Text('shipping information',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    )),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Order Date',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w200
-                      ),
-                    ),
-                    Text(
-                      '20 , july 2024, 05:23',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),
-                    )
-
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Order Date',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w200
-                      ),
-                    ),
-                    Text(
-                      '20 , july 2024, 05:23',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),
-                    )
-
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Order Date',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w200
-                      ),
-                    ),
-                    Text(
-                      '20 , july 2024, 05:23',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),
-                    )
-
-                  ],
-                ),
-
-                SizedBox(height: 20),
-                Text('payment info',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    )),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Payment Method',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w200
-                      ),
-                    ),
-                    Text(
-                      'Cash on delivery',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),
-                    )
-
-                  ],
-                ),
-
-                
-              ],
-            ),
-          ),
-
-          
-        ],
-      ),
     );
   }
 }
 
-
 class Tshirt extends StatelessWidget {
-  const Tshirt({super.key});
+  final String type;
+  const Tshirt({Key? key, required this.type}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -250,31 +402,44 @@ class Tshirt extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset(
-                  'assets/coffee.jpg',
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12), // Border radius added
+                  ),
+                  child: Image.asset(
+                    'assets/coffee.jpg',
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 SizedBox(width: 20),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        'T-shirt',
+                      '$type', // Made bold
                       style: TextStyle(
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16
                       ),
                     ),
                     SizedBox(height: 5),
                     Text(
-                        'size : L',
+                      'size : L',
                       style: TextStyle(
-                        fontWeight: FontWeight.w200
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                     SizedBox(height: 5),
-                    Text("&500")
+                    Text(
+                      "\$500", // Made bold
+                      style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -282,14 +447,34 @@ class Tshirt extends StatelessWidget {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('color : yellow'),
+              Row(
+                children: [
+                  Text('color :'),
+                  Text(' yellow',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    ),
+                  )
+                ],
+              ),
               SizedBox(height: 15),
-              Text('Qty 1')
+              Row(
+                children: [
+                  Text('Qty :'),
+                  Text('1',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),
+                  )
+                ],
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
   }
 }
+
